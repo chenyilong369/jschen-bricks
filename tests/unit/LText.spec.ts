@@ -41,7 +41,7 @@ describe('LText.vue', () => {
     expect(window.location.href).toBe('https://baidu.com')
   })
 
-  it.only('Ltext with actionType in Editing and URL should not trigger location href change', async () => {
+  it('Ltext with actionType in Editing and URL should not trigger location href change', async () => {
     const props = {
       ...textDefaultProps,
       actionType: 'url',
