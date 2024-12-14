@@ -4,7 +4,6 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
-    "rootDir": "src",
     "declaration": false,
     "jsxImportSource": "vue",
     "importHelpers": true,
