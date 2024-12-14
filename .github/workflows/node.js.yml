@@ -36,3 +36,17 @@ jobs:
         env:
           # 刚刚设置的 NPM_TOKEN
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Read package.json
+        uses: tyankatsu0105/read-package-version-actions@v1
+        id: package-version
+        
+        # 关于创建 release 的更多参数，可以查看 actions/create-release@v1
+      - name: Create Release for Tag
+        id: release_tag
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }} # 这块需要用到 github的token，因为需要对分之进行代码推送
+        with:
+          tag_name: jschen_brick-v${{ steps.package-version.outputs.version }}
+          release_name: Release jschen_brick-v${{ steps.package-version.outputs.version }}
+          prerelease: false # 是否为预发布版本
