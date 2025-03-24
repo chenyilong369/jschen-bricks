@@ -1,16 +1,12 @@
 <template>
-  <img 
-    :style="styleProps" 
-    class="l-image-component" 
-    @click.prevent="handleClick"
-    :src="src"
-  />
+  <img :style="styleProps" class="l-image-component" @click.prevent="handleClick" :src="imageSrc" :draggable="false" />
 </template>
 <script lang="ts">
-import { CSSProperties, defineComponent } from 'vue'
-import useComponentCommon from '../../hooks/useComponentCommon'
-import { transformToComponentProps, imageDefaultProps, imageStylePropsNames } from '../../defaultProps'
-const defaultProps = transformToComponentProps(imageDefaultProps)
+import { defineComponent } from 'vue'
+import { transformToComponentProps, isEditingProp, componentsDefaultProps } from '../../defaultProps'
+import useStylePick from '@/hooks/useStylePick'
+import useComponentClick from '@/hooks/useComponentClick'
+const defaultProps = transformToComponentProps(componentsDefaultProps['l-image'].props, isEditingProp)
 
 // array that contains style props
 export default defineComponent({
@@ -18,11 +14,12 @@ export default defineComponent({
   props: {
     ...defaultProps
   },
-  setup (props) {
-    const { styleProps, handleClick } = useComponentCommon(props, imageStylePropsNames)
+  setup(props) {
+    const styleProps = useStylePick(props)
+    const handleClick = useComponentClick(props)
     return {
-       styleProps: styleProps as unknown as CSSProperties,
-       handleClick
+      styleProps,
+      handleClick
     }
   }
 })
@@ -31,6 +28,5 @@ export default defineComponent({
 <style scoped>
 .l-image-component {
   max-width: 100%;
-  position: relative !important;
 }
 </style>

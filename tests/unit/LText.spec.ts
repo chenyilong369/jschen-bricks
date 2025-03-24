@@ -23,7 +23,7 @@ describe('LText.vue', () => {
     }
     const wrapper = shallowMount(LText, {props})
     expect(wrapper.text()).toBe(msg)
-    expect(wrapper.element.tagName).toBe('DIV')
+    expect(wrapper.element.tagName).toBe('P')
     const style = wrapper.attributes().style
     expect(style.includes('font-size')).toBeTruthy()
     expect(style.includes('actionType')).toBeFalsy()

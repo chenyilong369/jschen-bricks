@@ -1,35 +1,42 @@
 <template>
-  <h1>Vue3 ts 标准模版</h1>
-  <ul>
-    <li>开箱即用</li>
-    <li>typescript</li>
-    <li>Vue3</li>
-    <li>支持 tsx</li>
-    <li>eslint</li>
-    <li>简单易用可扩展</li>
-  </ul>
+  <final-page :components="testData.components" :page="testData.page"></final-page>
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted } from 'vue';
-
+/* eslint-disable vue/no-unused-components */
+import { defineComponent } from 'vue'
+import LText from './components/LText/LText.vue'
+import LImage from './components/LImage/LImage.vue'
+import LShape from './components/LShape/LShape.vue'
+import FinalPage from './components/FinalPage/FinalPage.vue'
 export default defineComponent({
   name: 'App',
-  setup() {
-    onMounted(() => {
-      getCurrentInstance()?.appContext.config.globalProperties.$echo()
-    })
+  components: {
+    LText,
+    LImage,
+    LShape,
+    FinalPage
+  },
+  setup () {
+    const testData = {
+      page: { setting: {}, props: { height: '600px', backgroundImage: 'url("https://vue-maker.oss-cn-hangzhou.aliyuncs.com/vue-marker/5f6ea094dc5a797fb46c1db5.jpg")'}},
+      // 页面上面一个个组件的属性
+      components: [
+        {id: '123', name: 'l-text', props: { text: 'hello', top: '0', left: '20px'}},
+        {id: '234', name: 'l-image', props: { imageSrc: 'https://images.pexels.com/photos/27582996/pexels-photo-27582996/free-photo-of-a-statue-of-arco-da-rua-augusto-in-lisbon.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', top: '30px', left: '20px'}},
+        {id: '235', name: 'l-shape', props: { backgroundColor: 'red', top: '50px', left: '20px', width: '100px', height: '100px'}},
+        // 这是一个链接
+        {id: '345', name: 'l-text', props: { backgroundColor: "#1890ff", color: "#ffffff", text: "按钮内容",  width: "100px", actionType: "to", url: "http://www.baidu.com", top: '200px', left: '150px',
+        }}
+      ]
+    }
+    return {
+      testData
+    }
   }
-});
+})
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
