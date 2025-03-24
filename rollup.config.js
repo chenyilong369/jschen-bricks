@@ -53,5 +53,5 @@ export default {
     PluginVue(), 
     css({ output: 'app.css' })
   ],
-  external: ['vue', 'lodash-es']
+  // external: ['vue', 'lodash-es']
 }
